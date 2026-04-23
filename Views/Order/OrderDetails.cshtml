@@ -1,0 +1,52 @@
+@model List<OrderItem>
+@{
+	ViewData["Title"] = "Order Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-3">📦 Order Details</h2>
+
+@if (Model != null && Model.Any())
+{
+	<!-- ✅ ORDER INFO (SHOW ONCE) -->
+	<div class="card p-3 mb-3 shadow-sm">
+		<p><strong>Delivery Address:</strong> @Model.First().Order.ShippingAddress</p>
+		<p><strong>Payment ID:</strong> @Model.First().Order.PaymentId</p>
+		<p><strong>Payment Status:</strong> @Model.First().Order.PaymentStatus</p>
+	</div>
+
+	<!-- ✅ TABLE -->
+	<table class="table table-bordered text-center">
+		<thead class="table-dark">
+			<tr>
+				<th>Product</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Total</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Product.product_name</td>
+					<td>₹@item.Price</td>
+					<td>@item.Quantity</td>
+					<td>₹@(item.Price* item.Quantity)</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+	<!-- ✅ GRAND TOTAL -->
+	<div class="text-end">
+		<h4 class="fw-bold text-success">
+			Total: ₹@Model.Sum(x => x.Price * x.Quantity)
+		</h4>
+	</div>
+}
+else
+{
+	<p>No order details found.</p>
+}

@@ -1,0 +1,59 @@
+@{
+	ViewData["Title"] = "CustomerProfile";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Customer
+@if (TempData["Success"] != null)
+{
+	<script>
+		alert("@TempData["Success"]");
+	</script>
+}
+
+<div class="container">
+	<div class="row mt-3">
+		<div class="col-md-2"></div>
+
+		<div class="col-md-8">
+			<h4 class="text-center">Customer Profile</h4>
+
+			<!-- PROFILE IMAGE -->
+			<form method="post" enctype="multipart/form-data" asp-action="changeProfileImage" class="text-center">
+
+				
+
+				<input type="hidden" name="customer_id" value="@Model.customer_id" />
+				<input type="hidden" name="customer_name" value="@Model.customer_name" />
+				<input type="hidden" name="customer_phone" value="@Model.customer_phone" />
+				<input type="hidden" name="customer_email" value="@Model.customer_email" />
+				<input type="hidden" name="customer_password" value="@Model.customer_password" />
+				
+
+			</form>
+
+			<!-- UPDATE PROFILE -->
+			<form method="post" asp-action="updateCustomerProfile">
+
+				<input type="hidden" name="customer_id" value="@Model.customer_id" />
+
+				<input type="text" name="customer_name" class="form-control mb-3"
+					   value="@Model.customer_name" placeholder="Enter Your Name" />
+
+				<input type="text" name="customer_phone" class="form-control mb-3"
+					   value="@Model.customer_phone" placeholder="Enter Your Phone Number" />
+
+				<input type="text" name="customer_email" class="form-control mb-3"
+					   value="@Model.customer_email" placeholder="Enter Your Email" />
+
+				<input type="text" name="customer_password" class="form-control mb-3"
+					   value="@Model.customer_password" placeholder="Enter Your Password" />
+
+				
+				<input type="submit" class="btn btn-primary" value="Update Profile" />
+
+			</form>
+		</div>
+
+		<div class="col-md-2"></div>
+	</div>
+</div>

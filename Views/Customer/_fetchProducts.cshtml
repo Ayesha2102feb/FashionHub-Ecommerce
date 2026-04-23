@@ -1,0 +1,78 @@
+@model List<Product>
+<style>
+	.product-img {
+		width: 100%;
+		height: 200px;
+		overflow: hidden;
+	}
+
+	.product-image {
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+	}
+</style>
+<div class="container-fluid pt-5 pb-3">
+	<h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+		<span class="bg-secondary pr-3">Our Products</span>
+	</h2>
+
+	<div class="row px-xl-5">
+
+		@foreach (var pro in Model)
+		{
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+
+					<!-- Image Box -->
+					<div class="product-img position-relative overflow-hidden">
+						
+						<a>
+							<img src="~/product_images/@pro.product_image"
+								 class="product-image"
+								 asp-append-version="true" />
+						</a>
+						<div class="product-action">
+						<form method="post" asp-action="AddToCart">
+							<input type="hidden" name="prod_id" value="@pro.product_id" />
+
+							
+							<a href="@Url.Action("ProductDetails", "Customer", new { id = pro.product_id })"
+   class="btn btn-block btn-product btn-cart">
+    Click Here
+</a>
+						</form>
+						
+						</div>
+						
+
+					</div>
+
+					<!-- Product Details -->
+					<div class="text-center py-4">
+						<a href="@Url.Action("ProductDetails", "Customer", new { id = pro.product_id })">
+							@pro.product_name
+						</a>
+
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h6>@pro.product_price</h6>
+						</div>
+
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small>
+							<small class="fa fa-star text-primary mr-1"></small>
+							<small class="fa fa-star text-primary mr-1"></small>
+							<small class="fa fa-star text-primary mr-1"></small>
+							<small class="fa fa-star text-primary mr-1"></small>
+							<small>(99)</small>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		}
+
+	</div>
+</div>
+
+

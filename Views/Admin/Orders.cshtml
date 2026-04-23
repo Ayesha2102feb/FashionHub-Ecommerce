@@ -1,0 +1,60 @@
+@model List<Order>
+
+<h2>All Orders</h2>
+
+<table class="table table-bordered text-center">
+	<thead>
+		<tr>
+			<th>Order ID</th>
+			<th>Customer</th>
+			<th>Date</th>
+			<th>Total</th>
+			<th>Status</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		@foreach (var order in Model)
+		{
+			<tr>
+				<td>@order.Id</td>
+				<td>@order.Customer.customer_name</td>
+				<td>@order.OrderDate.ToString("dd-MM-yyyy")</td>
+				<td>₹@order.TotalAmount</td>
+				@if (order != null)
+				{
+					<td>
+						<strong></strong>
+
+						@if (order.Status == "Pending")
+						{
+							<span class="badge bg-warning text-dark">Pending</span>
+						}
+						else if (order.Status == "Shipped")
+						{
+							<span class="badge bg-info">Shipped</span>
+						}
+						else if (order.Status == "Delivered")
+						{
+							<span class="badge bg-success">Delivered</span>
+						}
+						else
+						{
+							// ✅ instead of Unknown → show Pending
+							<span class="badge bg-warning text-dark">Pending</span>
+						}
+					</td>
+				}
+				<td>
+					<a href="/Admin/UpdateStatus/@order.Id" class="btn btn-primary btn-sm">
+						Update
+					</a>
+					<a href="/Admin/OrderDetails/@order.Id" class="btn btn-info btn-sm">
+						Details
+					</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

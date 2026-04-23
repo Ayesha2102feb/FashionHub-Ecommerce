@@ -1,0 +1,47 @@
+@model List<EcomWebsite.Models.Product>
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml"; // ✅ Customer layout
+}
+
+<div class="container mt-4">
+
+	<h2 class="text-center mb-4">
+		@ViewBag.CategoryName Products
+	</h2>
+
+	<div class="row">
+		@if (Model.Any())
+		{
+			foreach (var item in Model)
+			{
+				<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+					<div class="card p-3 text-center shadow-sm">
+
+						<img src="~/product_images/@item.product_image"
+							 class="img-fluid mb-2"
+							 style="height:200px; object-fit:cover;" />
+
+						<h6>@item.product_name</h6>
+
+						<p class="text-warning font-weight-bold">
+							₹@item.product_price
+						</p>
+
+						<a href="@Url.Action("ProductDetails", "Customer", new { id = item.product_id })"
+						   class="btn btn-sm btn-primary">
+							View Details
+						</a>
+
+					</div>
+				</div>
+			}
+		}
+		else
+		{
+			<div class="col-12 text-center text-danger">
+				<h5>No products found in this category</h5>
+			</div>
+		}
+	</div>
+
+</div>

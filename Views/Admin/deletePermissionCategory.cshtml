@@ -1,0 +1,24 @@
+@model Category
+<div class="container-fluid px-4">
+	<h1 class="mt-4 text-center text-uppercase text-danger" style="letter-spacing:4px">Are  u sure want to Delete this Category ?</h1>
+</div>
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+
+		@* <img src="@Url.Content("~/customer_images/" + Model.customer_image)"
+			 asp-append-version="true"
+			 width="250"
+			 height="250"
+			 class="my-3" /> *@
+
+		<ul class="list-group my-3">
+			<li class="list-group-item">Category Id: @Model.category_id</li>
+			<li class="list-group-item">Category Name : @Model.category_name</li>
+		</ul>
+		<a href="@Url.Action("deleteCategory", "Admin", new { id = Model.category_id })" class="btn btn-danger">Delete Category</a>
+		<a href="@Url.Action("fetchCategory", "Admin")" class="btn btn-warning">Back to List</a>
+	</div>
+
+	<div class="col-md-2"></div>
+</div>

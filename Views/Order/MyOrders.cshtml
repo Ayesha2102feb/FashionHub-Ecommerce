@@ -1,0 +1,75 @@
+@model List<Order>
+
+@{
+	ViewData["Title"] = "My Orders";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+	<h2 class="mb-4">🧾 My Orders</h2>
+
+	@if (Model != null && Model.Any())
+	{
+		<table class="table table-bordered text-center shadow-sm">
+			<thead class="table-dark">
+				<tr>
+					<th>Order ID</th>
+					<th>Date</th>
+					<th>Total Amount</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@foreach (var order in Model)
+				{
+					<tr>
+						<td>@order.Id</td>
+						<td>@order.OrderDate.ToString("dd-MM-yyyy")</td>
+						<td>₹@order.TotalAmount</td>
+
+						<!-- STATUS -->
+						<td>
+							<span class="badge
+		                    @(order.Status == "Cancelled" ? "bg-danger" : "bg-warning text-dark")">
+								@order.Status
+							</span>
+						</td>
+
+						<!-- ACTION -->
+						<td>
+							<!-- View -->
+							<a href="@Url.Action("OrderDetails", "Order", new { id = order.Id })"
+							   class="btn btn-primary btn-sm">
+								View
+							</a>
+
+							<!-- Invoice -->
+							<a href="@Url.Action("Invoice", "Order", new { id = order.Id })"
+							   class="btn btn-success btn-sm">
+								Invoice
+							</a>
+
+							<!-- Cancel -->
+							@if (order.Status != "Cancelled")
+							{
+								<a href="@Url.Action("CancelOrder", "Order", new { id = order.Id })"
+								   class="btn btn-warning btn-sm"
+								   onclick="return confirm('Are you sure to cancel this order?');">
+									Cancel
+								</a>
+							}
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<div class="alert alert-info text-center">
+			No orders found 🛒
+		</div>
+	}
+</div>

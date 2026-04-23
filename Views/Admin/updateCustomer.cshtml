@@ -1,0 +1,20 @@
+<form method="post" enctype="multipart/form-data">
+
+	<input type="hidden" value="@Model.customer_id" name="customer_id" />
+
+	<input type="text" value="@Model.customer_name" name="customer_name" class="form-control my-3" placeholder="Name" />
+
+	<input type="text" value="@Model.customer_phone" name="customer_phone" class="form-control my-3" placeholder="Phone" />
+
+	<input type="email" value="@Model.customer_email" name="customer_email" class="form-control my-3" placeholder="Email" />
+
+	<!-- ❌ Remove password OR make hidden -->
+	@* <input type="text" value="@Model.customer_password" name="customer_password" /> *@
+
+	
+
+	<input type="file" name="customer_image" class="form-control my-3" />
+
+	<input type="submit" value="Update Customer" class="form-control my-3 btn btn-primary" />
+
+</form>

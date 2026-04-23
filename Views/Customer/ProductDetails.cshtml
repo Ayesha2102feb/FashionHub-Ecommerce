@@ -1,0 +1,84 @@
+@model Product
+
+@{
+	ViewData["Title"] = "Product Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+
+	<div class="row shadow-lg p-4 bg-white rounded">
+
+		<!-- LEFT: PRODUCT IMAGE -->
+		<div class="col-md-5 text-center">
+			<img src="@("~/product_images/" + Model.product_image)"
+				 asp-append-version="true"
+				 class="img-fluid border rounded p-2"
+				 style="height:400px; object-fit:cover;" />
+
+			<!-- Buttons -->
+			<div class="mt-4">
+
+				<!-- Add to Cart -->
+				<form method="post" asp-action="AddToCart" asp-controller="Customer">
+					<input type="hidden" name="prod_id" value="@Model.product_id" />
+
+					<button type="submit" class="btn btn-warning w-100 mb-2">
+						🛒 Add to Cart
+					</button>
+				</form>
+
+				<!-- Buy Now -->
+				<form method="post" action="/Order/Checkout">
+					<input type="hidden" name="selectedItems" value="@Model.product_id" />
+
+					<a href="@Url.Action("fetchCart", "Customer")" class="btn btn-danger w-100">
+						⚡ View Cart
+					</a>
+				</form>
+			</div>
+		</div>
+
+		<!-- RIGHT: PRODUCT DETAILS -->
+		<div class="col-md-7">
+
+			<h2 class="mb-3">@Model.product_name</h2>
+
+			<!-- Rating -->
+			<div class="mb-2">
+				⭐⭐⭐⭐⭐ <span class="text-muted">(99 reviews)</span>
+			</div>
+
+			<!-- Price -->
+			<h3 class="text-success mb-3">
+				₹ @Model.product_price
+			</h3>
+
+			<!-- Description -->
+			<p class="mb-4">
+				<strong>Description:</strong><br />
+				@Model.product_description
+			</p>
+
+			<!-- Quantity Selector (UI only) -->
+			@* <div class="mb-4">
+				<label><strong>Quantity:</strong></label><br />
+				<button class="btn btn-outline-secondary btn-sm">-</button>
+				<span class="mx-2">1</span>
+				<button class="btn btn-outline-secondary btn-sm">+</button>
+			</div> *@
+
+			<!-- Extra Info -->
+			<ul class="list-unstyled">
+				<li>✔ Free Delivery</li>
+				<li>✔ 7 Days Replacement</li>
+				<li>✔ Cash on Delivery Available</li>
+			</ul>
+
+			<br />
+
+			
+			
+		</div>
+	</div>
+</div>

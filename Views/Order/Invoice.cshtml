@@ -1,0 +1,105 @@
+@model List<OrderItem>
+
+@{
+	ViewData["Title"] = "Invoice";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	@@media print {
+		button, .no-print {
+			display: none;
+		}
+
+		body {
+			background: white;
+		}
+
+		.card {
+			box-shadow: none;
+			border: none;
+		}
+	}
+</style>
+
+<div class="container mt-4">
+
+	<div class="card p-4 shadow">
+
+		<!-- HEADER -->
+		<div class="text-center mb-4">
+			<h2 class="fw-bold text-primary">🧾 Invoice</h2>
+			<p class="text-muted">Ecommerce Store</p>
+		</div>
+
+		@if (Model != null && Model.Any())
+		{
+			<!-- ORDER INFO -->
+			<div class="mb-3">
+				<p><strong>Order ID:</strong> @Model.First().Order.Id</p>
+				<p><strong>Date:</strong> @Model.First().Order.OrderDate.ToString("dd-MM-yyyy")</p>
+				<p><strong>Payment ID:</strong> @Model.First().Order.PaymentId</p>
+				<p><strong>Status:</strong> @Model.First().Order.PaymentStatus</p>
+			</div>
+
+			<!-- ADDRESS -->
+			<div class="mb-3">
+				<p><strong>Shipping Address:</strong></p>
+				<p>@Model.First().Order.ShippingAddress</p>
+			</div>
+
+			<hr />
+
+			<!-- TABLE -->
+			<table class="table table-bordered text-center">
+				<thead class="table-dark">
+					<tr>
+						<th>Product</th>
+						<th>Price</th>
+						<th>Qty</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>@item.Product?.product_name</td>
+							<td>₹@item.Price.ToString("0.00")</td>
+							<td>@item.Quantity</td>
+							<td>₹@((item.Price * item.Quantity).ToString("0.00"))</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+
+			<!-- GRAND TOTAL -->
+			<div class="text-end mt-3">
+				<h4 class="fw-bold text-success">
+					Grand Total: ₹@Model.Sum(x => x.Price * x.Quantity).ToString("0.00")
+				</h4>
+			</div>
+
+			<!-- BUTTONS -->
+			<div class="mt-4 no-print">
+				<!-- Download -->
+				<a href="/Order/DownloadInvoice/@Model.First().Order.Id"
+				   target="_blank"
+				   class="btn btn-primary">
+					Download Invoice
+				</a>
+
+				<!-- Print -->
+				<button onclick="window.print()" class="btn btn-secondary">
+					Print Invoice
+				</button>
+			</div>
+		}
+		else
+		{
+			<p class="text-danger">No invoice data found.</p>
+		}
+
+	</div>
+</div>

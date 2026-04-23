@@ -1,0 +1,52 @@
+@{
+	ViewData["Title"] = "Search Results";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-center mt-4">
+	Results for "@ViewBag.Query"
+</h3>
+
+<div class="container mt-4">
+	<div class="row">
+
+		@if (ViewData["product"] is List<EcomWebsite.Models.Product> products && products.Any())
+		{
+			foreach (var item in products)
+			{
+				<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+					<div class="border p-3 text-center rounded">
+
+						<img src="~/product_images/@item.product_image"
+							 class="img-fluid mb-2"
+							 style="height:200px; object-fit:cover;" />
+
+						<h6>@item.product_name</h6>
+
+						<p class="text-primary font-weight-bold">
+							₹@item.product_price
+						</p>
+
+						<a href="@Url.Action("ProductDetails", "Customer", new { id = item.product_id })"
+						   class="btn btn-sm btn-outline-primary">
+							View
+						</a>
+
+						<a href="@Url.Action("AddToCart", "Customer", new { prod_id = item.product_id })"
+						   class="btn btn-sm btn-primary">
+							<i class="fa fa-shopping-cart"></i>
+						</a>
+
+					</div>
+				</div>
+			}
+		}
+		else
+		{
+			<div class="col-12 text-center text-danger">
+				<h5>No products found</h5>
+			</div>
+		}
+
+	</div>
+</div>

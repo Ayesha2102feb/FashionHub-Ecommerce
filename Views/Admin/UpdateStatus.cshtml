@@ -1,0 +1,68 @@
+@model Order
+
+<div class="container mt-5">
+	<div class="card shadow-lg border-0">
+
+		<!-- 🔵 Header -->
+		<div class="card-header text-white"
+			 style="background: linear-gradient(45deg, #4e73df, #224abe);">
+			<h4 class="mb-0 text-center">🔄 Update Order Status</h4>
+		</div>
+
+		<div class="card-body bg-light p-4">
+
+			<form method="post" asp-action="UpdateStatus">
+
+				<input type="hidden" asp-for="Id" />
+
+				<!-- Order Info -->
+				<div class="mb-3">
+					<label class="fw-bold">Order ID:</label>
+					<span class="ms-2 text-primary">#@Model.Id</span>
+				</div>
+
+				<div class="mb-3">
+					<label class="fw-bold">Current Status:</label>
+					<span class="ms-2">
+						@if (Model.Status == "Pending")
+						{
+							<span class="badge bg-warning text-dark px-3 py-2">Pending</span>
+						}
+						else if (Model.Status == "Shipped")
+						{
+							<span class="badge bg-info text-dark px-3 py-2">Shipped</span>
+						}
+						else
+						{
+							<span class="badge bg-success px-3 py-2">Pending</span>
+						}
+					</span>
+				</div>
+
+				<!-- Dropdown -->
+				<div class="mb-3">
+					<label class="fw-bold">Change Status</label>
+
+					<select asp-for="Status" class="form-select mt-2 shadow-sm">
+						<option value="Pending">Pending</option>
+						<option value="Shipped">Shipped</option>
+						<option value="Delivered">Delivered</option>
+					</select>
+				</div>
+
+				<!-- Buttons -->
+				<div class="d-flex justify-content-between mt-4">
+					<a href="/Admin/Orders" class="btn btn-outline-dark px-4">
+						← Back
+					</a>
+
+					<button type="submit" class="btn text-white px-4"
+							style="background: linear-gradient(45deg, #1cc88a, #13855c);">
+						✅ Update Status
+					</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>

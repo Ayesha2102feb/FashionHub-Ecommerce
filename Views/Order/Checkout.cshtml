@@ -1,0 +1,213 @@
+@* @{
+	ViewData["Title"] = "Checkout";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+
+			<h2 class="text-center mb-4">🛍️ Complete Your Purchase</h2>
+
+			<div class="card shadow-lg border-0 rounded-4 p-4 text-center">
+
+				<h4 class="fw-bold text-primary mb-3">🧾 Checkout Summary</h4>
+
+				<hr />
+
+				<h6 class="text-muted">Total Amount</h6>
+
+				<h2 class="fw-bold text-success mb-4">
+					₹@ViewBag.TotalAmount
+				</h2>
+
+				<!-- ✅ FORM -->
+				<form id="checkoutForm">
+
+					<div class="form-group mb-3 text-start">
+						<label><b>Shipping Address</b></label>
+						<textarea id="shippingAddress" class="form-control" required></textarea>
+					</div>
+
+					<button type="button" id="rzp-button" class="btn btn-success btn-lg w-100 rounded-3">
+						💳 Pay Now
+					</button>
+
+				</form>
+
+				<p class="mt-3 text-muted" style="font-size: 14px;">
+					🔒 Secure payment powered by Razorpay
+				</p>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- Razorpay Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+	var options = {
+		"key": "rzp_test_SaXViQTvNyPNLv",
+		"amount": @(Convert.ToInt32(ViewBag.TotalAmount) * 100),
+		"currency": "INR",
+		"name": "Ecommerce Store",
+		"description": "Order Payment",
+
+		// ✅ SUCCESS HANDLER (FIXED)
+		"handler": function (response) {
+
+			var address = document.getElementById("shippingAddress").value;
+
+			if (!address) {
+				alert("Please enter shipping address");
+				return;
+			}
+
+			window.location.href = "/Order/PaymentSuccess?"
+				+ "paymentId=" + response.razorpay_payment_id
+				+ "&address=" + encodeURIComponent(address);
+		},
+
+		// OPTIONAL PREFILL
+		"prefill": {
+			"name": "Customer",
+			"email": "test@gmail.com",
+			"contact": "9999999999"
+		},
+
+		"theme": {
+			"color": "#28a745"
+		},
+
+		"modal": {
+			"ondismiss": function () {
+				window.location.href = "/Order/PaymentFailed";
+			}
+		}
+	};
+
+	var rzp1 = new Razorpay(options);
+
+	document.getElementById('rzp-button').onclick = function (e) {
+
+		var address = document.getElementById("shippingAddress").value;
+
+		if (!address) {
+			alert("Please enter shipping address");
+			return;
+		}
+
+		rzp1.open();
+		e.preventDefault();
+	};
+</script>
+ *@
+ @{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <h2 class="text-center mb-4">🛍️ Complete Your Purchase</h2>
+
+            <div class="card shadow-lg border-0 rounded-4 p-4 text-center">
+
+                <h4 class="fw-bold text-primary mb-3">🧾 Checkout Summary</h4>
+
+                <hr />
+
+                <h6 class="text-muted">Total Amount</h6>
+
+                <h2 class="fw-bold text-success mb-4">
+                    ₹@ViewBag.TotalAmount
+                </h2>
+
+                <!-- ✅ FORM -->
+				<form id="checkoutForm">
+
+					<div class="form-group mb-3 text-start">
+						<label><b>Shipping Address</b></label>
+						<textarea id="shippingAddress" name="address" class="form-control" required></textarea>
+					</div>
+
+					<button type="button" id="rzp-button" class="btn btn-success btn-lg w-100 rounded-3">
+						💳 Pay Now
+					</button>
+
+				</form>
+
+                <p class="mt-3 text-muted" style="font-size: 14px;">
+                    🔒 Secure payment powered by Razorpay
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Razorpay Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+    var options = {
+        "key": "rzp_test_SaXViQTvNyPNLv",
+        "amount": @(Convert.ToInt32(ViewBag.TotalAmount) * 100),
+        "currency": "INR",
+        "name": "Ecommerce Store",
+        "description": "Order Payment",
+
+        // ✅ SUCCESS HANDLER (FIXED)
+        "handler": function (response) {
+
+            var address = document.getElementById("shippingAddress").value;
+
+            if (!address) {
+                alert("Please enter shipping address");
+                return;
+            }
+
+            window.location.href = "/Order/PaymentSuccess?"
+                + "paymentId=" + response.razorpay_payment_id
+                + "&address=" + encodeURIComponent(address);
+        },
+
+        // OPTIONAL PREFILL
+        "prefill": {
+            "name": "Customer",
+            "email": "test@gmail.com",
+            "contact": "9999999999"
+        },
+
+        "theme": {
+            "color": "#28a745"
+        },
+
+        "modal": {
+            "ondismiss": function () {
+                window.location.href = "/Order/PaymentFailed";
+            }
+        }
+    };
+
+    var rzp1 = new Razorpay(options);
+
+    document.getElementById('rzp-button').onclick = function (e) {
+
+        var address = document.getElementById("shippingAddress").value;
+
+        if (!address) {
+            alert("Please enter shipping address");
+            return;
+        }
+
+        rzp1.open();
+        e.preventDefault();
+    };
+</script>

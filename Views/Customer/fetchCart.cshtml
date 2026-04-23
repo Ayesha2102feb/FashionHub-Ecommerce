@@ -1,0 +1,124 @@
+@{
+	ViewData["Title"] = "fetchCart";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (TempData["message"] != null)
+{
+	<h4 class="text-success">@TempData["message"]</h4>
+}
+@model List<Cart>
+
+<div class="container mt-3">
+	<h2 class="mb-3">Your Cart</h2>
+
+	
+
+	<!-- ✅ FORM START -->
+	<form method="post" action="/Order/Checkout">
+
+		<div class="col-md-12">
+			<table class="table table-bordered table-striped text-center">
+				<thead>
+					<tr>
+						<th>Select</th> <!-- ✅ NEW -->
+						<th>Cart Id</th>
+						<th>Product Name</th>
+						<th>Quantity</th>
+						<th>Price</th>
+						<th>Total</th>
+						<th>Option</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					@if (Model != null && Model.Any())
+					{
+						foreach (var cart in Model)
+						{
+							<tr>
+								<!-- ✅ Checkbox -->
+								<td>
+									<input type="checkbox" name="selectedItems" value="@cart.cart_id" />
+								</td>
+
+								<td>@cart.cart_id</td>
+								<td>@cart.products.product_name</td>
+
+								<!-- Quantity -->
+								<td>
+									<a href="@Url.Action("DecreaseQty", "Customer", new { id = cart.cart_id })"
+									   class="btn btn-danger btn-sm">-</a>
+
+									<span class="fw-bold">@cart.product_quantity</span>
+
+									<a href="@Url.Action("IncreaseQty", "Customer", new { id = cart.cart_id })"
+									   class="btn btn-success btn-sm">+</a>
+								</td>
+
+								<td>@cart.products.product_price</td>
+
+								
+								<td class="item-total">
+									@(cart.products.product_price* cart.product_quantity)
+								</td>
+
+								<!-- Options -->
+								<td>
+									
+
+									<a href="@Url.Action("removeProduct", "Customer", new { id = cart.cart_id })"
+									   class="btn btn-danger btn-sm">
+										Remove
+									</a>
+								</td>
+							</tr>
+						}
+					}
+					else
+					{
+						<tr>
+							<td colspan="7">Your cart is empty</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<script>
+				function updateTotal() {
+					let total = 0;
+
+					document.querySelectorAll('input[name="selectedItems"]:checked').forEach(cb => {
+						let row = cb.closest('tr');
+						let itemTotal = parseFloat(row.querySelector('.item-total').innerText);
+						total += itemTotal;
+					});
+
+					document.getElementById('totalAmount').innerText = total;
+				}
+
+				// trigger when checkbox clicked
+				document.querySelectorAll('input[name="selectedItems"]').forEach(cb => {
+					cb.addEventListener('change', updateTotal);
+				});
+			</script>
+
+			<!-- Total -->
+			@if (Model != null && Model.Any())
+			{
+				<div class="text-end">
+					<h4>
+						Total: ₹<span id="totalAmount">0</span>
+					</h4>
+				</div>
+
+				<!-- ✅ Checkout Selected -->
+				<button type="submit" class="btn btn-success mt-2">
+					Checkout
+				</button>
+			}
+			
+		</div>
+
+	</form>
+	<!-- ✅ FORM END -->
+
+</div>

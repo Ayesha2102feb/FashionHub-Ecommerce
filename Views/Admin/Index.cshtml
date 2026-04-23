@@ -1,0 +1,45 @@
+<div class="container mt-4">
+	<div class="row">
+
+		<!-- Total Orders -->
+		<div class="col-md-3">
+			<div class="card text-white bg-primary mb-3 shadow">
+				<div class="card-body text-center">
+					<h5>Total Orders</h5>
+					<h3>@(ViewBag.TotalOrders ?? 0)</h3>
+				</div>
+			</div>
+		</div>
+
+		<!-- Total Users -->
+		<div class="col-md-3">
+			<div class="card text-white bg-success mb-3 shadow">
+				<div class="card-body text-center">
+					<h5>Total Users</h5>
+					<h3>@(ViewBag.TotalUsers ?? 0)</h3>
+				</div>
+			</div>
+		</div>
+
+		<!-- Total Products -->
+		<div class="col-md-3">
+			<div class="card text-white bg-warning mb-3 shadow">
+				<div class="card-body text-center">
+					<h5>Total Products</h5>
+					<h3>@(ViewBag.TotalProducts ?? 0)</h3>
+				</div>
+			</div>
+		</div>
+
+		<!-- Total Revenue -->
+		<div class="col-md-3">
+			<div class="card text-white bg-danger mb-3 shadow">
+				<div class="card-body text-center">
+					<h5>Total Revenue</h5>
+					<h3>₹ @(ViewBag.TotalRevenue ?? 0)</h3>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

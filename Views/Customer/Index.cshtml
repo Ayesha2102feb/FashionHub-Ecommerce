@@ -1,0 +1,507 @@
+@{
+	ViewData["Title"] = "Home";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
+	var userName = Context.Session.GetString("user_email");
+}
+
+<style>
+	.section-title {
+		font-weight: 600;
+		letter-spacing: 2px;
+	}
+
+	/* HERO */
+	.hero-text h1 {
+		font-size: 50px;
+		font-weight: 700;
+	}
+
+	/* FEATURES */
+	.feature-box {
+		transition: 0.3s;
+	}
+
+		.feature-box:hover {
+			background: #f8f9fa;
+			transform: translateY(-5px);
+		}
+
+	/* CATEGORY */
+	.category-card {
+		position: relative;
+		overflow: hidden;
+		cursor: pointer;
+	}
+
+		.category-card img {
+			transition: 0.4s;
+			height: 350px;
+			width: 100%;
+			object-fit: cover;
+		}
+
+		.category-card:hover img {
+			transform: scale(1.1);
+		}
+
+	.category-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,0.4);
+		opacity: 0;
+		transition: 0.3s;
+	}
+
+	.category-card:hover .category-overlay {
+		opacity: 1;
+	}
+
+	/* PRODUCTS */
+	.product-card {
+		transition: 0.3s;
+	}
+
+		.product-card:hover {
+			transform: translateY(-8px);
+			box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+		}
+</style>
+
+<!-- Welcome -->
+
+<style>
+
+	
+	.hero-text h1 {
+		font-size: 48px;
+		font-weight: 700;
+		color: #fff;
+	}
+
+	.hero-text p {
+		font-size: 20px;
+		color: #f1f1f1;
+	}
+	.animate-text {
+		opacity: 0;
+		transform: translateY(30px);
+		transition: all 0.8s ease-in-out;
+	}
+
+	.carousel-item.active .animate-text {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	
+
+	.hero-text {
+		position: absolute;
+		top: 50%;
+		left: 8%;
+		transform: translateY(-50%);
+		color: white;
+		z-index: 2;
+		max-width: 500px;
+		/* 🔥 glass effect */
+		background: rgba(0,0,0,0.3);
+		padding: 20px;
+		border-radius: 10px;
+		backdrop-filter: blur(5px);
+	}
+
+		.hero-text .btn {
+			font-weight: 600;
+			box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
+		}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    color: white;
+    z-index: 2;
+    max-width: 500px;
+}
+
+.hero-text h1 {
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.hero-text p {
+    font-size: 18px;
+}
+	.carousel {
+		margin-top: 0;
+	}
+
+	.hero-text {
+		left: 6%;
+	}
+</style>
+<!-- HERO SECTION -->
+<div class="container-fluid p-0">
+	<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+
+		<div class="carousel-inner">
+
+			<!-- SLIDE 1 -->
+			<div class="carousel-item active">
+				<img src="~/website/img/bann.jpg" class="hero-img" />
+
+				<div class="overlay"></div>
+
+				<div class="hero-text animate-text">
+					<h1>New Fashion Collection</h1>
+					<p>Trendy • Stylish • Affordable</p>
+					<a href="/Customer/fetchAllProducts" class="btn btn-warning mt-3 px-4 py-2">
+						Shop Now
+					</a>
+				</div>
+			</div>
+
+			<!-- SLIDE 2 -->
+			@* <div class="carousel-item">
+				<img src="~/website/img/bby2.jpg" class="hero-img" />
+
+				<div class="overlay"></div>
+
+				<div class="hero-text animate-text">
+					<h1>Latest Trends</h1>
+					<p>Upgrade Your Style Today</p>
+					<a href="/Customer/fetchAllProducts" class="btn btn-warning mt-3 px-4 py-2">
+						Shop Now
+					</a>
+				</div>
+			</div> *@
+			<div class="carousel-item">
+				<img src="~/website/img/menfash.jpg" class="hero-img" />
+
+				<div class="overlay"></div>
+
+				<div class="hero-text animate-text">
+					<h1>Latest Trends</h1>
+					<p>Upgrade Your Style Today</p>
+					<a href="/Customer/fetchAllProducts" class="btn btn-warning mt-3 px-4 py-2">
+						Shop Now
+					</a>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<img src="~/website/img/womenfash.jpg" class="hero-img" />
+
+				<div class="overlay"></div>
+
+				<div class="hero-text animate-text">
+					<h1>Latest Trends</h1>
+					<p>Upgrade Your Style Today</p>
+					<a href="/Customer/fetchAllProducts" class="btn btn-warning mt-3 px-4 py-2">
+						Shop Now
+					</a>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<img src="~/website/img/kidsfash.jpg" class="hero-img" />
+
+				<div class="overlay"></div>
+
+				<div class="hero-text animate-text">
+					<h1>Latest Trends</h1>
+					<p>Upgrade Your Style Today</p>
+					<a href="/Customer/fetchAllProducts" class="btn btn-warning mt-3 px-4 py-2">
+						Shop Now
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+<style>
+	/* FULL WIDTH FIX */
+	#heroCarousel {
+		width: 100%;
+		
+	}
+
+	/* IMAGE */
+	.hero-img {
+		width: 100%;
+		height: 650px;
+		object-fit: cover;
+	}
+
+	/* OVERLAY */
+	.overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+		z-index: 1;
+	}
+
+	/* TEXT */
+	.hero-text {
+		position: absolute;
+		top: 50%;
+		left: 8%;
+		transform: translateY(-50%);
+		color: white;
+		z-index: 2;
+		max-width: 500px;
+	}
+
+		.hero-text h1 {
+			font-size: 45px;
+			font-weight: bold;
+		}
+
+		.hero-text p {
+			font-size: 18px;
+		}
+
+	/* TEXT ANIMATION */
+	.animate-text {
+		opacity: 0;
+		transform: translateY(40px);
+		transition: all 1s ease;
+	}
+
+	/* ACTIVE ANIMATION */
+	.carousel-item.active .animate-text {
+		opacity: 1;
+		transform: translateY(0);
+	}
+</style>
+<br />
+<br />
+
+<!-- FEATURES -->
+<div class="container-fluid mb-5">
+	<div class="row px-xl-5 text-center">
+
+		<div class="col-md-4">
+			<div class="feature-box p-4 border rounded">
+				<i class="fa fa-truck fa-2x text-primary mb-2"></i>
+				<h6>Free Shipping</h6>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="feature-box p-4 border rounded">
+				<i class="fa fa-check-circle fa-2x text-primary mb-2"></i>
+				<h6>Quality Products</h6>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="feature-box p-4 border rounded">
+				<i class="fa fa-headset fa-2x text-primary mb-2"></i>
+				<h6>24/7 Support</h6>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="container-fluid mb-5">
+	<h3 class="text-center section-title mb-5">Shop By Category</h3>
+
+	<div class="row px-xl-5">
+
+		@if (ViewData["category"] is List<EcomWebsite.Models.Category> categories && categories.Any())
+		{
+			foreach (var cat in categories)
+			{
+				string imagePath = "/product_images/default.jpg";
+
+				if (cat.category_name.ToLower() == "men")
+				{
+					imagePath = "/product_images/boy.jpg";
+				}
+				else if (cat.category_name.ToLower() == "women")
+				{
+					imagePath = "/product_images/lady.jpg";
+				}
+				else if (cat.category_name.ToLower() == "kids")
+				{
+					imagePath = "/product_images/kiddo.jpg";
+				}
+
+				<div class="col-lg-4 col-md-6 mb-4">
+					<a href="@Url.Action("ProductByCategory", "Customer", new { id = cat.category_id })">
+
+						<div class="category-card rounded">
+
+							<img src="@imagePath" />
+
+							<div class="category-overlay d-flex flex-column justify-content-center align-items-center">
+								<h3 class="text-white">@cat.category_name</h3>
+								<span class="btn btn-light btn-sm mt-2">Shop Now</span>
+							</div>
+
+						</div>
+
+					</a>
+				</div>
+			}
+		}
+		else
+		{
+			<div class="col-12 text-center text-danger">
+				No categories available
+			</div>
+		}
+
+	</div>
+</div>
+<style>
+/* PRODUCT CARD */
+.product-card {
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 15px 30px rgba(0,0,0,0.2);
+}
+
+/* IMAGE */
+.product-img img {
+    transition: 0.4s;
+}
+
+.product-card:hover .product-img img {
+    transform: scale(1.1);
+}
+
+/* OVERLAY */
+.product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.product-card:hover .product-overlay {
+    opacity: 1;
+}
+
+/* BUTTONS */
+.product-overlay .btn {
+    border-radius: 50%;
+    padding: 10px 12px;
+}
+
+/* WISHLIST */
+.wishlist-btn {
+    background: white;
+    padding: 8px 10px;
+    border-radius: 50%;
+    color: red;
+}
+
+.wishlist-btn:hover {
+    background: red;
+    color: white;
+}
+</style>
+<!-- PRODUCTS -->
+<div class="container-fluid mb-5">
+	<h3 class="text-center section-title mb-5">Latest Products</h3>
+
+	<div class="row px-xl-5">
+
+		@if (ViewData["product"] is List<EcomWebsite.Models.Product> products && products.Any())
+		{
+			foreach (var item in products)
+			{
+				<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+
+					<div class="product-card bg-white rounded shadow-sm position-relative">
+
+						
+						
+
+						<!-- Image -->
+						<div class="product-img position-relative overflow-hidden">
+							<img src="~/product_images/@item.product_image"
+								 class="img-fluid w-100"
+								 style="height:230px; object-fit:cover;" />
+
+							<!-- Hover Actions -->
+							<div class="product-overlay d-flex justify-content-center align-items-center">
+
+								<!-- Add to Cart -->
+								<a href="@Url.Action("fetchCart", "Customer", new { id = item.product_id })"
+								   class="btn btn-light btn-sm mx-1">
+									<i class="fa fa-shopping-cart"></i>
+								</a>
+
+								<!-- View -->
+								<a href="@Url.Action("ProductDetails", "Customer", new { id = item.product_id })"
+								   class="btn btn-light btn-sm mx-1">
+									<i class="fa fa-eye"></i>
+								</a>
+
+							</div>
+						</div>
+
+						<!-- Content -->
+						<div class="p-3 text-center">
+							<h6 class="mb-1">@item.product_name</h6>
+
+							<p class="text-dark font-weight-bold mb-2">
+								₹@item.product_price
+							</p>
+						</div>
+
+					</div>
+
+				</div>
+			}
+		}
+		else
+		{
+			<div class="col-12 text-center text-danger">
+				No products available
+			</div>
+		}
+
+	</div>
+
+	<div class="text-center mt-4">
+		<a href="/Customer/fetchAllProducts" class="btn btn-primary px-4 py-2">
+			View All Products
+		</a>
+	</div>
+</div>
+
+<script>
+	 var carousel = document.querySelector('#heroCarousel');
+
+	carousel.addEventListener('slide.bs.carousel', function () {
+		document.querySelectorAll('.animate-text').forEach(el => {
+			el.style.opacity = "0";
+			el.style.transform = "translateY(40px)";
+		});
+	});
+
+	carousel.addEventListener('slid.bs.carousel', function () {
+		document.querySelector('.carousel-item.active .animate-text').style.opacity = "1";
+		document.querySelector('.carousel-item.active .animate-text').style.transform = "translateY(0)";
+	});
+</script>

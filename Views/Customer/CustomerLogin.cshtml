@@ -1,0 +1,128 @@
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Login - MultiShop</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+	<!-- Favicon -->
+	<link href="~/website/img/favicon.ico" rel="icon" />
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+	<!-- Font Awesome -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+	<!-- Template CSS -->
+	<link href="~/website/css/style.min.css" rel="stylesheet" />
+
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: url('/website/img/log.jpg') no-repeat center center;
+			background-size: cover;
+			font-family: 'Roboto', sans-serif;
+		}
+
+		.login-card {
+			width: 400px;
+			background: #ffffff;
+			padding: 40px;
+			border-radius: 10px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+		}
+
+			.login-card h3 {
+				text-align: center;
+				margin-bottom: 30px;
+				font-weight: 600;
+			}
+
+		.form-control {
+			height: 45px;
+			border-radius: 5px;
+		}
+
+		.btn-login {
+			background-color: #D19C97;
+			color: #fff;
+			width: 100%;
+			height: 45px;
+			border-radius: 5px;
+			font-weight: 500;
+		}
+
+			.btn-login:hover {
+				background-color: #c48883;
+			}
+
+		.login-link {
+			text-align: center;
+			margin-top: 15px;
+		}
+
+			.login-link a {
+				color: #D19C97;
+				font-weight: 500;
+			}
+
+				.login-link a:hover {
+					text-decoration: underline;
+				}
+	</style>
+</head>
+
+<body>
+
+	<div class="login-card">
+		<h3>LOGIN FORM</h3>
+
+		<!-- ✅ FIXED FORM -->
+		<form method="post" asp-action="CustomerLogin" asp-controller="Customer">
+
+			@Html.AntiForgeryToken()
+
+			<div class="form-group mb-3">
+				<input type="email" name="customer_email" class="form-control" placeholder="Email Address" required />
+			</div>
+
+			<div class="form-group mb-3">
+				<input type="password" name="customer_password" class="form-control" placeholder="Password" required />
+			</div>
+
+			<button type="submit" class="btn btn-login">
+				LOG IN
+			</button>
+
+			<div class="login-link">
+				<a href="@Url.Action("CustomerRegister", "Customer")">
+					Don't have an account? Sign Up
+				</a>
+			</div>
+
+			<!-- ✅ SAFE MESSAGE -->
+			@if (ViewBag.message != null)
+			{
+				<h5 class="text-danger text-center mt-3">@ViewBag.message</h5>
+			}
+
+		</form>
+	</div>
+
+	<!-- JS Files -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="~/website/js/main.js"></script>
+
+</body>
+</html>

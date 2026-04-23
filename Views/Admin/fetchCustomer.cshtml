@@ -1,0 +1,40 @@
+@model List<Customer>
+<div class="container-fluid px-4">
+	<h1 class="mt-4 text-center text-uppercase" style="letter-spacing:4px">All Customer</h1>
+</div>
+<div class="row">
+<div class="col-md-12">
+<table class="table table-bordered table-striped text-center mt-2">
+	<thead>
+		<tr>
+			<th>Customer Name</th>
+					<th>Customer Email-id</th>
+					<td>Customer Phone Number</td>
+					
+					<th>Options</th>
+					
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach(var cust in Model)
+		{
+		<tr>
+
+			<td>@cust.customer_name</td>
+						<td>@cust.customer_email</td>
+			<td>@cust.customer_phone</td>
+			
+			<td>
+				<a href="@Url.Action("customerDetails","Admin",new{Id=cust.customer_id})" class="btn btn-primary">Details</a>
+				<a href="@Url.Action("updateCustomer","Admin",new{Id=cust.customer_id})" class="btn btn-warning">Update</a>
+				<a href="@Url.Action("deletePermission","Admin",new{Id=cust.customer_id})" class="btn btn-danger">Delete</a>
+			</td>
+		</tr>
+		}
+	</tbody>
+</table>
+
+</div>
+
+</div>
