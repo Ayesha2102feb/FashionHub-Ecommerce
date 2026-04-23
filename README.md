@@ -1,106 +1,75 @@
-# 🛍️ FashionHub - E-Commerce Web Application
+# [Start Bootstrap - SB Admin](https://startbootstrap.com/template/sb-admin/)
 
-## 📌 Overview
+[SB Admin](https://startbootstrap.com/template/sb-admin/) is an open source, admin dashboard template for [Bootstrap](https://getbootstrap.com/) created by [Start Bootstrap](https://startbootstrap.com/).
 
-FashionHub is a basic e-commerce web application built using ASP.NET Core.
-It allows users to browse products, add items to cart, and place orders.
-This project demonstrates CRUD operations, session management, and database integration using Entity Framework Core.
+## Preview
 
----
+[![SB Admin Preview](https://assets.startbootstrap.com/img/screenshots/templates/sb-admin.png)](https://startbootstrap.github.io/startbootstrap-sb-admin/)
 
-## 🚀 Features
+**[View Live Preview](https://startbootstrap.github.io/startbootstrap-sb-admin/)**
 
-* 🛒 Product listing and details
-* 🔍 Search functionality
-* 🧺 Add to cart
-* 📦 Order placement
-* 👤 Customer login/logout (Session-based)
-* 🧾 Order history
-* 🛠️ Admin product management
+## Status
 
----
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/StartBootstrap/startbootstrap-sb-admin/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/startbootstrap-sb-admin.svg)](https://www.npmjs.com/package/startbootstrap-sb-admin)
+[![dependencies Status](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin/status.svg)](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin)
+[![devDependencies Status](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin/dev-status.svg)](https://david-dm.org/StartBootstrap/startbootstrap-sb-admin?type=dev)
 
-## 🧑‍💻 Tech Stack
+## Download and Installation
 
-* ASP.NET Core MVC
-* Entity Framework Core
-* SQL Server
-* Bootstrap
-* C#
+To begin using this template, choose one of the following options to get started:
 
----
+* [Download the latest release on Start Bootstrap](https://startbootstrap.com/template/sb-admin/)
+* Install via npm: `npm i startbootstrap-sb-admin`
+* Clone the repo: `git clone https://github.com/StartBootstrap/startbootstrap-sb-admin.git`
+* [Fork, Clone, or Download on GitHub](https://github.com/StartBootstrap/startbootstrap-sb-admin)
 
-## ⚙️ Setup Instructions
+## Usage
 
-### 1️⃣ Clone the repository
+### Basic Usage
 
-```bash id="c5j3lt"
-git clone https://github.com/Ayesha2102feb/FashionHub-Ecommerce.git
-cd FashionHub-Ecommerce
-```
+After downloading, simply edit the HTML and CSS files included with `dist` directory. These are the only files you need to worry about, you can ignore everything else! To preview the changes you make to the code, you can open the `index.html` file in your web browser.
 
----
+### Advanced Usage
 
-### 2️⃣ Open in Visual Studio
+Clone the source files of the theme and navigate into the theme's root directory. Run `npm install` and then run `npm start` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `package.json` file to see which scripts are included.
 
-* Open `EcomWebsite.sln`
+#### npm Scripts
 
----
+* `npm run build` builds the project - this builds assets, HTML, JS, and CSS into `dist`
+* `npm run build:assets` copies the files in the `src/assets/` directory into `dist`
+* `npm run build:pug` compiles the Pug located in the `src/pug/` directory into `dist`
+* `npm run build:scripts` brings the `src/js/scripts.js` file into `dist`
+* `npm run build:scss` compiles the SCSS files located in the `src/scss/` directory into `dist`
+* `npm run clean` deletes the `dist` directory to prepare for rebuilding the project
+* `npm run start:debug` runs the project in debug mode
+* `npm start` or `npm run start` runs the project, launches a live preview in your default browser, and watches for changes made to files in `src`
 
-### 3️⃣ Configure Database
+You must have npm installed in order to use this build environment.
 
-Open `appsettings.json` and update:
+## Bugs and Issues
 
-```json id="8np1px"
-"ConnectionStrings": {
-  "myconnection": "Server=.;Database=EcomWebsite;Trusted_Connection=True;"
-}
-```
+Have a bug or an issue with this template? [Open a new issue](https://github.com/StartBootstrap/startbootstrap-sb-admin/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](https://startbootstrap.com/template/sb-admin/).
 
----
+## Custom Builds
 
-### 4️⃣ Run Migrations
+You can hire Start Bootstrap to create a custom build of any template, or create something from scratch using Bootstrap. For more information, visit the **[custom design services page](https://startbootstrap.com/bootstrap-design-services/)**.
 
-Open Package Manager Console and run:
+## About
 
-```bash id="vqun6r"
-Update-Database
-```
+Start Bootstrap is an open source library of free Bootstrap templates and themes. All of the free templates and themes on Start Bootstrap are released under the MIT license, which means you can use them for any purpose, even for commercial projects.
 
----
+* <https://startbootstrap.com>
+* <https://twitter.com/SBootstrap>
 
-### 5️⃣ Run the Project
+Start Bootstrap was created by and is maintained by **[David Miller](https://davidmiller.io/)**.
 
-* Press **F5** or click **Run**
-* Application will open in browser
+* <https://davidmiller.io>
+* <https://twitter.com/davidmillerhere>
+* <https://github.com/davidtmiller>
 
----
+Start Bootstrap is based on the [Bootstrap](https://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
 
-## 📂 Project Structure
+## Copyright and License
 
-Controllers/
-Models/
-Views/
-Services/
-Repositories/
-wwwroot/
-
----
-
-## 💡 Future Improvements
-
-* JWT Authentication
-* API architecture enhancement
-* Product size & inventory management
-
----
-
-## 🙋‍♀️ Author
-
-Developed by **Isha Siddiqa**
-
----
-
-## ⭐ Note
-
-This project is created for learning and demonstration purposes.
+Copyright 2013-2021 Start Bootstrap LLC. Code released under the [MIT](https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE) license.
